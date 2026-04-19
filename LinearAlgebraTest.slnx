@@ -3,5 +3,5 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="LinearAlgebraTest.vcxproj" />
+  <Project Path="LinearAlgebraTest.vcxproj" Id="b3dbde57-016d-4d2f-8b04-58a29d6bcde1" />
 </Solution>
