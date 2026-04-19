@@ -48,8 +48,8 @@ int main() {
 
 	std::cout << '\n';
 
-	VectorFloat vector(x);
-	VectorFloat result = vector + VectorFloat({ 1.0, 1.0, 1.0 });
+	Vector vector(x);
+	Vector result = vector * 2;
 
 	for (auto& val : result.getVals()) {
 		std::cout << val << '\n';
