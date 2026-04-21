@@ -189,22 +189,33 @@ public:
 
 class OperationHandler {
 public:
-	OperationHandler() {}
-
-	Matrix matrixMul(Matrix& lhs, Matrix& rhs) {
-		if (lhs.size() != rhs.size()) {
-			throw std::runtime_error("Row * Column rule not met, unable to compute matrix multplication");
-			exit(EXIT_FAILURE);
+	Matrix matrixMul(const Matrix& lhs, const Matrix& rhs) {
+		if (lhs.size() == 0 || rhs.size() == 0) {
+			throw std::runtime_error("Cannot multiply empty matrices");
 		}
 
-		std::vector<Vector> result = {};
-		for (size_t i = 0; i < rhs.size(); i++) {
-			std::vector<float> vec = {};
-			for (size_t j = 0; j < lhs[i].size(); j++) {
-				vec.push_back(lhs[i][j]);
+		if (lhs[0].size() != rhs.size()) {
+			throw std::runtime_error("Row * Column rule not met, unable to compute matrix multiplication");
+		}
+
+		std::vector<std::vector<float>> result;
+
+		for (size_t i = 0; i < lhs.size(); i++) {
+			std::vector<float> row;
+
+			for (size_t j = 0; j < rhs[0].size(); j++) {
+				float sum = 0.0f;
+
+				for (size_t k = 0; k < lhs[0].size(); k++) {
+					sum += lhs[i][k] * rhs[k][j];
+				}
+
+				row.push_back(sum);
 			}
-			Vector column(vec);
-			float dotProduct = column.dot(rhs[i]);
+
+			result.push_back(row);
 		}
+
+		return Matrix(result);
 	}
 };
